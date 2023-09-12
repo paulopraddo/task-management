@@ -1,5 +1,6 @@
 package com.paulopraddo.projetotaskmanagement.entity;
 
+import com.paulopraddo.projetotaskmanagement.model.Conclusao;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,5 +22,7 @@ public class Tarefa {
     private String titulo;
 
     private String descricao;
+
+    private Conclusao conclusao;
 
 }
