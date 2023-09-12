@@ -18,17 +18,22 @@ public class AppController {
 
     @GetMapping("/teste")
     public String teste() {
-        return tarefaService.listarTarefas();
+        return tarefaService.exibirTodasAsTarefas();
+    }
+
+    @GetMapping("/exibeTarefaPeloId/id/{idTarefa}")
+    public String exibeTarefaPeloId(@PathVariable Long idTarefa) {
+        return tarefaService.exibirTarefaPeloId(idTarefa);
+    }
+
+    @GetMapping("/listarTarefas")
+    public String exibirTodasAsTarefas() {
+        return tarefaService.exibirTodasAsTarefas();
     }
 
     @PostMapping("/salvarTarefa")
     public String salvarNovaTarefa(@RequestBody TarefaData tarefaData) {
         tarefaService.salvarNovaTarefa(tarefaData);
         return "OK";
-    }
-
-    @GetMapping("/exibeTarefaPeloId/id/{idTarefa}")
-    public String exibeTarefaPeloId(@PathVariable Long idTarefa) {
-        return tarefaService.exibirTarefaPeloId(idTarefa);
     }
 }

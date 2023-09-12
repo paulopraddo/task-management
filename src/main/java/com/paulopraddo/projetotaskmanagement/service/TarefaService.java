@@ -7,6 +7,9 @@ import lombok.AllArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class TarefaService {
@@ -21,14 +24,23 @@ public class TarefaService {
         tarefaRepository.save(tarefa);
     }
 
-    public String listarTarefas() {
-        return "Tarefas";
+    public String exibirTodasAsTarefas() {
+        String resposta = "Tarefas: ";
+        ArrayList<Tarefa> listaDeTarefas = (ArrayList<Tarefa>) tarefaRepository.findAll();
+        for (Tarefa tarefa : listaDeTarefas) {
+            resposta += exibirTarefa(tarefa);
+        }
+        return resposta;
     }
 
     public String exibirTarefaPeloId(Long idTarefa) {
         Tarefa tarefa = tarefaRepository.findById(idTarefa).orElse(null);
-        return "/ Tarefa: " + tarefa.getId() +
-                ", Titulo: " + tarefa.getTitulo() +
+        return exibirTarefa(tarefa);
+    }
+
+    public String exibirTarefa(Tarefa tarefa) {
+        return "/ Titulo: " + tarefa.getTitulo() +
                 ", Descrição: " + tarefa.getDescricao() + " /";
     }
+
 }
