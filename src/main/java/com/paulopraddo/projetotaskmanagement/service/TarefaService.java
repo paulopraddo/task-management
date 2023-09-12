@@ -1,6 +1,7 @@
 package com.paulopraddo.projetotaskmanagement.service;
 
 import com.paulopraddo.projetotaskmanagement.entity.Tarefa;
+import com.paulopraddo.projetotaskmanagement.model.Conclusao;
 import com.paulopraddo.projetotaskmanagement.model.TarefaData;
 import com.paulopraddo.projetotaskmanagement.repository.TarefaRepository;
 import lombok.AllArgsConstructor;
@@ -16,10 +17,11 @@ public class TarefaService {
 
     private final TarefaRepository tarefaRepository;
 
-    public void salvarNovaTarefa(@NotNull TarefaData tarefaData) {
+    public void salvarNovaTarefa(TarefaData tarefaData) {
         Tarefa tarefa = new Tarefa();
         tarefa.setTitulo(tarefaData.getTitulo());
         tarefa.setDescricao(tarefaData.getDescricao());
+        tarefa.setConclusao(Conclusao.INCONCLUIDA);
 
         tarefaRepository.save(tarefa);
     }
