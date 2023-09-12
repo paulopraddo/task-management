@@ -27,4 +27,8 @@ public class AppController {
         return "OK";
     }
 
+    @GetMapping("/exibeTarefaPeloId/id/{idTarefa}")
+    public String exibeTarefaPeloId(@PathVariable Long idTarefa) {
+        return tarefaService.exibirTarefaPeloId(idTarefa);
+    }
 }

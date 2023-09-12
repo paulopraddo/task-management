@@ -13,7 +13,7 @@ public class TarefaService {
 
     private final TarefaRepository tarefaRepository;
 
-    public void salvarNovaTarefa(TarefaData tarefaData) {
+    public void salvarNovaTarefa(@NotNull TarefaData tarefaData) {
         Tarefa tarefa = new Tarefa();
         tarefa.setTitulo(tarefaData.getTitulo());
         tarefa.setDescricao(tarefaData.getDescricao());
@@ -25,4 +25,10 @@ public class TarefaService {
         return "Tarefas";
     }
 
+    public String exibirTarefaPeloId(Long idTarefa) {
+        Tarefa tarefa = tarefaRepository.findById(idTarefa).orElse(null);
+        return "/ Tarefa: " + tarefa.getId() +
+                ", Titulo: " + tarefa.getTitulo() +
+                ", Descrição: " + tarefa.getDescricao() + " /";
+    }
 }
