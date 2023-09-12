@@ -37,6 +37,11 @@ public class AppController {
         return "OK";
     }
 
+    @PostMapping("/atualizarTitulo/id/{idTarefa}/titulo/{newTitulo}")
+    public String atualizarTituloTarefa(@PathVariable Long idTarefa, @PathVariable String newTitulo) {
+        return tarefaService.atualizarTituloTarefa(idTarefa,newTitulo);
+    }
+
     @PostMapping("/atualizarDescricao/id/{idTarefa}/descricao/{newDescricao}")
     public String atualizarDescricaoTarefa(@PathVariable Long idTarefa, @PathVariable String newDescricao) {
         return tarefaService.atualizarDescricaoTarefa(idTarefa,newDescricao);
