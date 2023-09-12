@@ -46,4 +46,9 @@ public class AppController {
     public String atualizarDescricaoTarefa(@PathVariable Long idTarefa, @PathVariable String newDescricao) {
         return tarefaService.atualizarDescricaoTarefa(idTarefa,newDescricao);
     }
+
+    @PostMapping("/tarefaConcluida/id/{idTarefa}")
+    public String marcarTarefaComoConcluida(@PathVariable Long idTarefa) {
+        return tarefaService.marcarTarefaComoConcluida(idTarefa);
+    }
 }

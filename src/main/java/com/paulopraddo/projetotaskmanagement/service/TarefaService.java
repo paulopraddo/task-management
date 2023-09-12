@@ -56,4 +56,9 @@ public class TarefaService {
         return "Tarefa atualizada - " + exibirTarefaPeloId(idTarefa);
     }
 
+    public String marcarTarefaComoConcluida(Long idTarefa) {
+        tarefaRepository.marcarComoConcluida(idTarefa);
+        return "Tarefa Concluida";
+    }
+
 }

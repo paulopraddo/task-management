@@ -20,4 +20,9 @@ public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
     @Transactional
     @Query(value = "UPDATE TBTAREFAS SET DESCRICAO = :newDescricao WHERE id = :id", nativeQuery = true)
     void atualizarDescricao(@Param("id") Long id, @Param("newDescricao") String newDescricao);
+
+    @Modifying
+    @Transactional
+    @Query(value = "UPDATE TBTAREFAS SET CONCLUSAO = 'CONCLUIDA' WHERE id = :id", nativeQuery = true)
+    void marcarComoConcluida(@Param("id") Long id);
 }
