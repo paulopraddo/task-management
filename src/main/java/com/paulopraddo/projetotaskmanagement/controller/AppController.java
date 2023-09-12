@@ -36,4 +36,9 @@ public class AppController {
         tarefaService.salvarNovaTarefa(tarefaData);
         return "OK";
     }
+
+    @PostMapping("/atualizarDescricao/id/{idTarefa}/descricao/{newDescricao}")
+    public String atualizarDescricaoTarefa(@PathVariable Long idTarefa, @PathVariable String newDescricao) {
+        return tarefaService.atualizarDescricaoTarefa(idTarefa,newDescricao);
+    }
 }

@@ -43,4 +43,9 @@ public class TarefaService {
                 ", Descrição: " + tarefa.getDescricao() + " /";
     }
 
+    public String atualizarDescricaoTarefa(Long idTarefa, String descricao) {
+        tarefaRepository.atualizarDescricao(idTarefa,descricao);
+        return "Tarefa atualizada - " + exibirTarefaPeloId(idTarefa);
+    }
+
 }
