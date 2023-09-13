@@ -37,6 +37,12 @@ public class AppController {
         return "OK";
     }
 
+    @PutMapping("/atualizarId/id/{idTarefa}/newId/{newIdTarefa}")
+    public String atualizarIdTarefa(@PathVariable Long idTarefa, @PathVariable Long newIdTarefa) {
+        return tarefaService.atualizarIdTarefa(idTarefa,newIdTarefa);
+    }
+
+
     @PutMapping("/atualizarTitulo/id/{idTarefa}/titulo/{newTitulo}")
     public String atualizarTituloTarefa(@PathVariable Long idTarefa, @PathVariable String newTitulo) {
         return tarefaService.atualizarTituloTarefa(idTarefa,newTitulo);

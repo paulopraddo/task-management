@@ -45,6 +45,11 @@ public class TarefaService {
                 ", Descrição: " + tarefa.getDescricao() + " /";
     }
 
+    public String atualizarIdTarefa(Long idTarefa, Long newIdTarefa) {
+        tarefaRepository.atualizarId(idTarefa,newIdTarefa);
+        return "ID da tarefa atualizado";
+    }
+
 
     public String atualizarTituloTarefa(Long idTarefa, String titulo) {
         tarefaRepository.atualizarTitulo(idTarefa,titulo);
