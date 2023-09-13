@@ -61,4 +61,9 @@ public class TarefaService {
         return "Tarefa Concluida";
     }
 
+    public String deletarTodasAsTarefas() {
+        tarefaRepository.deleteAll();
+        return "Todas as tarefas foram deletadas";
+    }
+
 }
