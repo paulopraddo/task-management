@@ -5,11 +5,9 @@ import com.paulopraddo.projetotaskmanagement.model.Conclusao;
 import com.paulopraddo.projetotaskmanagement.model.TarefaData;
 import com.paulopraddo.projetotaskmanagement.repository.TarefaRepository;
 import lombok.AllArgsConstructor;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -18,11 +16,16 @@ public class TarefaService {
     private final TarefaRepository tarefaRepository;
 
     public void salvarNovaTarefa(TarefaData tarefaData) {
+
         Tarefa tarefa = new Tarefa();
-        tarefa.setTitulo(tarefaData.getTitulo());
-        tarefa.setDescricao(tarefaData.getDescricao());
-        tarefa.setDataEHora(tarefaData.getDataEHora());
+
+        tarefa.setTitulo(tarefaData.titulo());
+        tarefa.setDescricao(tarefaData.descricao());
+        tarefa.setDataEHora(tarefaData.dataEHora());
         tarefa.setConclusao(Conclusao.INCONCLUIDA);
+
+        System.out.println(tarefaData.dataEHora());
+        System.out.println(tarefaData.titulo());
 
         tarefaRepository.save(tarefa);
     }
