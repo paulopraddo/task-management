@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "tbtarefas")
@@ -22,6 +25,9 @@ public class Tarefa {
     private String titulo;
 
     private String descricao;
+
+    @DateTimeFormat
+    private LocalDateTime dataEHora;
 
     @Enumerated(EnumType.STRING)
     private Conclusao conclusao;

@@ -21,6 +21,7 @@ public class TarefaService {
         Tarefa tarefa = new Tarefa();
         tarefa.setTitulo(tarefaData.getTitulo());
         tarefa.setDescricao(tarefaData.getDescricao());
+        tarefa.setDataEHora(tarefaData.getDataEHora());
         tarefa.setConclusao(Conclusao.INCONCLUIDA);
 
         tarefaRepository.save(tarefa);
