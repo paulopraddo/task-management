@@ -51,4 +51,14 @@ public class AppController {
     public String marcarTarefaComoConcluida(@PathVariable Long idTarefa) {
         return tarefaService.marcarTarefaComoConcluida(idTarefa);
     }
+
+    @PostMapping("/deletarTarefas")
+    public String deletarTodasAsTarefas() {
+        return tarefaService.deletarTodasAsTarefas();
+    }
+
+    @PostMapping("/deletarTarefa/id/{idTarefa}")
+    public String deletarTarefaPeloId(@PathVariable Long idTarefa) {
+        return tarefaService.deletarTarefaPeloId(idTarefa);
+    }
 }

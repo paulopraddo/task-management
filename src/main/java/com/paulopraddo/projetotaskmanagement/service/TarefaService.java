@@ -66,4 +66,9 @@ public class TarefaService {
         return "Todas as tarefas foram deletadas";
     }
 
+    public String deletarTarefaPeloId(Long idTarefa) {
+        tarefaRepository.delete(tarefaRepository.findById(idTarefa).orElse(null));
+        return "Tarefa Deletada";
+    }
+
 }
