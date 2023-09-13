@@ -37,27 +37,27 @@ public class AppController {
         return "OK";
     }
 
-    @PostMapping("/atualizarTitulo/id/{idTarefa}/titulo/{newTitulo}")
+    @PutMapping("/atualizarTitulo/id/{idTarefa}/titulo/{newTitulo}")
     public String atualizarTituloTarefa(@PathVariable Long idTarefa, @PathVariable String newTitulo) {
         return tarefaService.atualizarTituloTarefa(idTarefa,newTitulo);
     }
 
-    @PostMapping("/atualizarDescricao/id/{idTarefa}/descricao/{newDescricao}")
+    @PutMapping("/atualizarDescricao/id/{idTarefa}/descricao/{newDescricao}")
     public String atualizarDescricaoTarefa(@PathVariable Long idTarefa, @PathVariable String newDescricao) {
         return tarefaService.atualizarDescricaoTarefa(idTarefa,newDescricao);
     }
 
-    @PostMapping("/tarefaConcluida/id/{idTarefa}")
+    @PutMapping("/tarefaConcluida/id/{idTarefa}")
     public String marcarTarefaComoConcluida(@PathVariable Long idTarefa) {
         return tarefaService.marcarTarefaComoConcluida(idTarefa);
     }
 
-    @PostMapping("/deletarTarefas")
+    @DeleteMapping("/deletarTarefas")
     public String deletarTodasAsTarefas() {
         return tarefaService.deletarTodasAsTarefas();
     }
 
-    @PostMapping("/deletarTarefa/id/{idTarefa}")
+    @DeleteMapping("/deletarTarefa/id/{idTarefa}")
     public String deletarTarefaPeloId(@PathVariable Long idTarefa) {
         return tarefaService.deletarTarefaPeloId(idTarefa);
     }
