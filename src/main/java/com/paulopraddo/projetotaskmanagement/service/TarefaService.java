@@ -7,6 +7,9 @@ import com.paulopraddo.projetotaskmanagement.repository.TarefaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 @Service
@@ -16,11 +19,11 @@ public class TarefaService {
     private final TarefaRepository tarefaRepository;
 
     public ResponseData salvarNovaTarefa(TarefaDTO tarefaDTO) {
-
+        TarefaDTOValidacao.validarTarefaDTO(tarefaDTO);
         Tarefa tarefa = new Tarefa();
         tarefa.setTitulo(tarefaDTO.titulo());
         tarefa.setDescricao(tarefaDTO.descricao());
-        tarefa.setDataEHora(tarefaDTO.dataEHora());
+        tarefa.setDataEHora(LocalDateTime.parse(tarefaDTO.dataEHora()));
         tarefa.setConclusao(Conclusao.INCONCLUIDA);
 
         tarefaRepository.save(tarefa);
@@ -83,4 +86,17 @@ public class TarefaService {
         return response;
     }
 
+    public class TarefaDTOValidacao {
+        public static void validarTarefaDTO(TarefaDTO tarefaDTO) throws IllegalArgumentException {
+            String dataEHoraStr = tarefaDTO.dataEHora();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+
+            try {
+                LocalDateTime dataEHora = LocalDateTime.parse(dataEHoraStr, formatter);
+            } catch (DateTimeParseException e) {
+                throw new IllegalArgumentException("A data e hora estão no formato incorreto: " + dataEHoraStr);
+            }
+        }
+    }
 }
