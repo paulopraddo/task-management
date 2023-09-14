@@ -37,6 +37,10 @@ public class TarefaService {
         for (Tarefa tarefa : listaDeTarefas) {
              responses.add(converter(tarefa));
         }
+        if (responses.isEmpty()) {
+            throw new NenhumRegistroEncotrado("A lista de tarefas está vazia. Não há tarefas para exibir.");
+        }
+
         return responses;
     }
 
@@ -97,6 +101,12 @@ public class TarefaService {
             } catch (DateTimeParseException e) {
                 throw new IllegalArgumentException("A data e hora estão no formato incorreto: " + dataEHoraStr);
             }
+        }
+    }
+
+    public class NenhumRegistroEncotrado extends RuntimeException {
+        public NenhumRegistroEncotrado(String mensagem) {
+            super(mensagem);
         }
     }
 }
