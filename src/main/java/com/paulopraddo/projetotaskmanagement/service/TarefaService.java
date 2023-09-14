@@ -2,7 +2,7 @@ package com.paulopraddo.projetotaskmanagement.service;
 
 import com.paulopraddo.projetotaskmanagement.entity.Tarefa;
 import com.paulopraddo.projetotaskmanagement.model.Conclusao;
-import com.paulopraddo.projetotaskmanagement.model.TarefaData;
+import com.paulopraddo.projetotaskmanagement.model.TarefaDTO;
 import com.paulopraddo.projetotaskmanagement.repository.TarefaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,17 +15,14 @@ public class TarefaService {
 
     private final TarefaRepository tarefaRepository;
 
-    public void salvarNovaTarefa(TarefaData tarefaData) {
+    public void salvarNovaTarefa(TarefaDTO tarefaDTO) {
 
         Tarefa tarefa = new Tarefa();
 
-        tarefa.setTitulo(tarefaData.titulo());
-        tarefa.setDescricao(tarefaData.descricao());
-        tarefa.setDataEHora(tarefaData.dataEHora());
+        tarefa.setTitulo(tarefaDTO.titulo());
+        tarefa.setDescricao(tarefaDTO.descricao());
+        tarefa.setDataEHora(tarefaDTO.dataEHora());
         tarefa.setConclusao(Conclusao.INCONCLUIDA);
-
-        System.out.println(tarefaData.dataEHora());
-        System.out.println(tarefaData.titulo());
 
         tarefaRepository.save(tarefa);
     }
@@ -39,9 +36,10 @@ public class TarefaService {
         return resposta;
     }
 
-    public String exibirTarefaPeloId(Long idTarefa) {
+    public ResponseData exibirTarefaPeloId(Long idTarefa) {
         Tarefa tarefa = tarefaRepository.findById(idTarefa).orElse(null);
-        return exibirTarefa(tarefa);
+        ResponseData response = converter(tarefa);
+        return response;
     }
 
     public String exibirTarefa(Tarefa tarefa) {
@@ -78,6 +76,15 @@ public class TarefaService {
     public String deletarTarefaPeloId(Long idTarefa) {
         tarefaRepository.delete(tarefaRepository.findById(idTarefa).orElse(null));
         return "Tarefa Deletada";
+    }
+
+    public ResponseData converter(Tarefa tarefa) {
+        TarefaData tarefaData = new TarefaData(tarefa.getTitulo(),tarefa.getDescricao(),tarefa.getDataEHora(),tarefa.getConclusao());
+        ResponseData response = new ResponseData();
+        response.setMessage("sucesso");
+        response.setCodigoHttp("OK");
+        response.setData(tarefaData);
+        return response;
     }
 
 }
