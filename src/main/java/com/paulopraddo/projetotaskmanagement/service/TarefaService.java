@@ -15,25 +15,26 @@ public class TarefaService {
 
     private final TarefaRepository tarefaRepository;
 
-    public void salvarNovaTarefa(TarefaDTO tarefaDTO) {
+    public ResponseData salvarNovaTarefa(TarefaDTO tarefaDTO) {
 
         Tarefa tarefa = new Tarefa();
-
         tarefa.setTitulo(tarefaDTO.titulo());
         tarefa.setDescricao(tarefaDTO.descricao());
         tarefa.setDataEHora(tarefaDTO.dataEHora());
         tarefa.setConclusao(Conclusao.INCONCLUIDA);
 
         tarefaRepository.save(tarefa);
+        return converter(tarefa);
     }
 
-    public String exibirTodasAsTarefas() {
-        String resposta = "Tarefas: ";
+    public ArrayList<ResponseData> exibirTodasAsTarefas() {
+        ArrayList<ResponseData> responses = new ArrayList<ResponseData>();
+
         ArrayList<Tarefa> listaDeTarefas = (ArrayList<Tarefa>) tarefaRepository.findAll();
         for (Tarefa tarefa : listaDeTarefas) {
-            resposta += exibirTarefa(tarefa);
+             responses.add(converter(tarefa));
         }
-        return resposta;
+        return responses;
     }
 
     public ResponseData exibirTarefaPeloId(Long idTarefa) {
@@ -42,30 +43,25 @@ public class TarefaService {
         return response;
     }
 
-    public String exibirTarefa(Tarefa tarefa) {
-        return "/ Titulo: " + tarefa.getTitulo() +
-                ", Descrição: " + tarefa.getDescricao() + " /";
-    }
-
-    public String atualizarIdTarefa(Long idTarefa, Long newIdTarefa) {
+    public ResponseData atualizarIdTarefa(Long idTarefa, Long newIdTarefa) {
         tarefaRepository.atualizarId(idTarefa,newIdTarefa);
-        return "ID da tarefa atualizado";
+        return converter(tarefaRepository.findById(newIdTarefa).orElse(null));
     }
 
 
-    public String atualizarTituloTarefa(Long idTarefa, String titulo) {
+    public ResponseData atualizarTituloTarefa(Long idTarefa, String titulo) {
         tarefaRepository.atualizarTitulo(idTarefa,titulo);
-        return "Tarefa atualizada - " + exibirTarefaPeloId(idTarefa);
+        return converter(tarefaRepository.findById(idTarefa).orElse(null));
     }
 
-    public String atualizarDescricaoTarefa(Long idTarefa, String descricao) {
+    public ResponseData atualizarDescricaoTarefa(Long idTarefa, String descricao) {
         tarefaRepository.atualizarDescricao(idTarefa,descricao);
-        return "Tarefa atualizada - " + exibirTarefaPeloId(idTarefa);
+        return converter(tarefaRepository.findById(idTarefa).orElse(null));
     }
 
-    public String marcarTarefaComoConcluida(Long idTarefa) {
+    public ResponseData marcarTarefaComoConcluida(Long idTarefa) {
         tarefaRepository.marcarComoConcluida(idTarefa);
-        return "Tarefa Concluida";
+        return converter(tarefaRepository.findById(idTarefa).orElse(null));
     }
 
     public String deletarTodasAsTarefas() {

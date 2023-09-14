@@ -6,6 +6,8 @@ import com.paulopraddo.projetotaskmanagement.service.TarefaService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @RestController
 @AllArgsConstructor
 public class AppController {
@@ -24,34 +26,33 @@ public class AppController {
     }
 
     @GetMapping("/listarTarefas")
-    public String exibirTodasAsTarefas() {
+    public ArrayList<ResponseData> exibirTodasAsTarefas() {
         return tarefaService.exibirTodasAsTarefas();
     }
 
     @PostMapping("/salvarTarefa")
-    public String salvarNovaTarefa(@RequestBody TarefaDTO tarefaDTO) {
-        tarefaService.salvarNovaTarefa(tarefaDTO);
-        return "OK";
+    public ResponseData salvarNovaTarefa(@RequestBody TarefaDTO tarefaDTO) {
+        return tarefaService.salvarNovaTarefa(tarefaDTO);
     }
 
     @PutMapping("/atualizarId/id/{idTarefa}/newId/{newIdTarefa}")
-    public String atualizarIdTarefa(@PathVariable Long idTarefa, @PathVariable Long newIdTarefa) {
+    public ResponseData atualizarIdTarefa(@PathVariable Long idTarefa, @PathVariable Long newIdTarefa) {
         return tarefaService.atualizarIdTarefa(idTarefa,newIdTarefa);
     }
 
 
     @PutMapping("/atualizarTitulo/id/{idTarefa}/titulo/{newTitulo}")
-    public String atualizarTituloTarefa(@PathVariable Long idTarefa, @PathVariable String newTitulo) {
+    public ResponseData atualizarTituloTarefa(@PathVariable Long idTarefa, @PathVariable String newTitulo) {
         return tarefaService.atualizarTituloTarefa(idTarefa,newTitulo);
     }
 
     @PutMapping("/atualizarDescricao/id/{idTarefa}/descricao/{newDescricao}")
-    public String atualizarDescricaoTarefa(@PathVariable Long idTarefa, @PathVariable String newDescricao) {
+    public ResponseData atualizarDescricaoTarefa(@PathVariable Long idTarefa, @PathVariable String newDescricao) {
         return tarefaService.atualizarDescricaoTarefa(idTarefa,newDescricao);
     }
 
     @PutMapping("/tarefaConcluida/id/{idTarefa}")
-    public String marcarTarefaComoConcluida(@PathVariable Long idTarefa) {
+    public ResponseData marcarTarefaComoConcluida(@PathVariable Long idTarefa) {
         return tarefaService.marcarTarefaComoConcluida(idTarefa);
     }
 
