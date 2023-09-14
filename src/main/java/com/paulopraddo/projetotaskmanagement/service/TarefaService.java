@@ -45,28 +45,32 @@ public class TarefaService {
     }
 
     public ResponseData exibirTarefaPeloId(Long idTarefa) {
+        verificaSeExisteRegistro(idTarefa);
         Tarefa tarefa = tarefaRepository.findById(idTarefa).orElse(null);
         ResponseData response = converter(tarefa);
         return response;
     }
 
     public ResponseData atualizarIdTarefa(Long idTarefa, Long newIdTarefa) {
+        verificaSeExisteRegistro(idTarefa);
         tarefaRepository.atualizarId(idTarefa,newIdTarefa);
         return converter(tarefaRepository.findById(newIdTarefa).orElse(null));
     }
 
-
     public ResponseData atualizarTituloTarefa(Long idTarefa, String titulo) {
+        verificaSeExisteRegistro(idTarefa);
         tarefaRepository.atualizarTitulo(idTarefa,titulo);
         return converter(tarefaRepository.findById(idTarefa).orElse(null));
     }
 
     public ResponseData atualizarDescricaoTarefa(Long idTarefa, String descricao) {
+        verificaSeExisteRegistro(idTarefa);
         tarefaRepository.atualizarDescricao(idTarefa,descricao);
         return converter(tarefaRepository.findById(idTarefa).orElse(null));
     }
 
     public ResponseData marcarTarefaComoConcluida(Long idTarefa) {
+        verificaSeExisteRegistro(idTarefa);
         tarefaRepository.marcarComoConcluida(idTarefa);
         return converter(tarefaRepository.findById(idTarefa).orElse(null));
     }
@@ -77,6 +81,7 @@ public class TarefaService {
     }
 
     public String deletarTarefaPeloId(Long idTarefa) {
+        verificaSeExisteRegistro(idTarefa);
         tarefaRepository.delete(tarefaRepository.findById(idTarefa).orElse(null));
         return "Tarefa Deletada";
     }
@@ -101,6 +106,13 @@ public class TarefaService {
             } catch (DateTimeParseException e) {
                 throw new IllegalArgumentException("A data e hora estão no formato incorreto: " + dataEHoraStr);
             }
+        }
+    }
+
+    public void verificaSeExisteRegistro(Long idTarefa) {
+        Tarefa tarefa = tarefaRepository.findById(idTarefa).orElse(null);
+        if(tarefa == null) {
+            throw new NenhumRegistroEncotrado("Nenhum registro com esse ID foi encontrado");
         }
     }
 
