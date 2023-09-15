@@ -5,6 +5,7 @@ import com.paulopraddo.projetotaskmanagement.model.Conclusao;
 import com.paulopraddo.projetotaskmanagement.model.TarefaDTO;
 import com.paulopraddo.projetotaskmanagement.repository.TarefaRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -90,7 +91,7 @@ public class TarefaService {
         TarefaData tarefaData = new TarefaData(tarefa.getTitulo(),tarefa.getDescricao(),tarefa.getDataEHora(),tarefa.getConclusao());
         ResponseData response = new ResponseData();
         response.setMessage("sucesso");
-        response.setCodigoHttp("OK");
+        response.setHttpStatus(HttpStatus.OK);
         response.setData(tarefaData);
         return response;
     }

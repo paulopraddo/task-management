@@ -1,10 +1,10 @@
 package com.paulopraddo.projetotaskmanagement.service;
 
-import com.paulopraddo.projetotaskmanagement.model.TarefaDTO;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.http.HttpStatus;
 
 @Getter
 @Setter
@@ -12,6 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ResponseData {
     private String message;
-    private String codigoHttp;
+    private HttpStatus httpStatus;
     private TarefaData data;
 }
