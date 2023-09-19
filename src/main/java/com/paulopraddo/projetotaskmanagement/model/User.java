@@ -24,9 +24,10 @@ public class User implements UserDetails {
 
     private String login;
 
-    @Column(name = "password")
     private String senha;
 
+    @Column(name = "papel")
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     public User(String login, String senha, UserRole role) {
