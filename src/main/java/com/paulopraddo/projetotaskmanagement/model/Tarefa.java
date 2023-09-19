@@ -1,4 +1,4 @@
-package com.paulopraddo.projetotaskmanagement.entity;
+package com.paulopraddo.projetotaskmanagement.model;
 
 import com.paulopraddo.projetotaskmanagement.model.Conclusao;
 import jakarta.persistence.*;

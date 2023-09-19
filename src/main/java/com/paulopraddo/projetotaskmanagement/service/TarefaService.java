@@ -1,6 +1,6 @@
 package com.paulopraddo.projetotaskmanagement.service;
 
-import com.paulopraddo.projetotaskmanagement.entity.Tarefa;
+import com.paulopraddo.projetotaskmanagement.model.Tarefa;
 import com.paulopraddo.projetotaskmanagement.model.Conclusao;
 import com.paulopraddo.projetotaskmanagement.model.TarefaDTO;
 import com.paulopraddo.projetotaskmanagement.repository.TarefaRepository;

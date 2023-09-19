@@ -1,6 +1,6 @@
 package com.paulopraddo.projetotaskmanagement.repository;
 
-import com.paulopraddo.projetotaskmanagement.entity.Tarefa;
+import com.paulopraddo.projetotaskmanagement.model.Tarefa;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
