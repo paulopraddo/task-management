@@ -1,6 +1,8 @@
 package com.paulopraddo.projetotaskmanagement.controller;
 
+import com.paulopraddo.projetotaskmanagement.confinguration.TokenService;
 import com.paulopraddo.projetotaskmanagement.model.AuthenticationDTO;
+import com.paulopraddo.projetotaskmanagement.model.LoginResponseDTO;
 import com.paulopraddo.projetotaskmanagement.model.RegisterDTO;
 import com.paulopraddo.projetotaskmanagement.model.User;
 import com.paulopraddo.projetotaskmanagement.repository.UserRepository;
@@ -24,12 +26,17 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    TokenService tokenService;
+
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.login(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        var token = tokenService.generateToken((User) auth.getPrincipal());
+
+        return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
     @PostMapping("/register")
