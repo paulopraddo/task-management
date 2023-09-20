@@ -28,10 +28,16 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(HttpMethod.GET).permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                         .requestMatchers(HttpMethod.POST, "/salvarTarefa").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/atualizarId/id/{idproduto}/newId/{newIdProduto}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/atualizarId/id/{idproduto}/newId/{newIdProduto}",
+                                "tarefaConcluida/id/{idTarefa}",
+                                "/atualizarDescricao/id/{idTarefa}/descricao/{desc}",
+                                "/atualizarTitulo/id/{idTarefa}/titulo/{titulo}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.DELETE,"/deletarTarefa/id/{idTarefa}",
+                                "/deletarTarefas").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
