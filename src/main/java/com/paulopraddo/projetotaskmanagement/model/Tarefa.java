@@ -1,6 +1,5 @@
 package com.paulopraddo.projetotaskmanagement.model;
 
-import com.paulopraddo.projetotaskmanagement.model.Conclusao;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

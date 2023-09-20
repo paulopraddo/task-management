@@ -84,15 +84,18 @@ public class TarefaService {
     public String deletarTarefaPeloId(Long idTarefa) {
         verificaSeExisteRegistro(idTarefa);
         tarefaRepository.delete(tarefaRepository.findById(idTarefa).orElse(null));
+
         return "Tarefa Deletada";
     }
 
     public ResponseData converter(Tarefa tarefa) {
         TarefaData tarefaData = new TarefaData(tarefa.getTitulo(),tarefa.getDescricao(),tarefa.getDataEHora(),tarefa.getConclusao());
         ResponseData response = new ResponseData();
+
         response.setMessage("sucesso");
         response.setHttpStatus(HttpStatus.OK);
         response.setData(tarefaData);
+
         return response;
     }
 
